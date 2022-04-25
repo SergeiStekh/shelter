@@ -1,3 +1,5 @@
+/* Fonts */
+
 @font-face {
   font-family: 'Arial';
   font-style: normal;
@@ -11,4 +13,463 @@
   font-style: normal;
   font-weight: normal;
   src: local('Georgia'), url('../../assets/fonts/Georgia.woff') format('woff');
+}
+
+/* Global styles */
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-width: 320px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  color: #F1CDB3;
+  line-height: 35px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  color: #000000;
+  line-height: 32.5px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  width: 207px;
+  height: 52px;
+  color: #292929;
+  background: #F1CDB3;
+  border-radius: 100px;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: 0.06em;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.button:hover {
+  background: #FDDCC4;
+  color: #292929;
+}
+
+/* Header */
+
+.background {
+  background: url("../../assets/images/start-screen-bg-mobile.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.main-header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px 10px 0 10px;
+}
+
+.logo-nav__wrapper {
+  align-items: center;
+}
+
+.main-header__logo {
+  display: block;
+  max-width: max-content;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo__title {
+  padding-bottom: 10px;
+}
+
+.logo__description {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 15px;
+  color: #FFFFFF;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
+
+.burger {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  top: 18px;
+  right: 44px;
+  transition: all .3s ease;
+}
+
+.burger__line {
+  width: 100%;
+  height: 2px;
+  background-color: #F1CDB3;
+}
+
+.burger.closed {
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 22px;
+  top: 49px;
+  right: 54px;
+}
+
+.burger.open {
+  width: 30px;
+  height: 22px;
+  transform: rotate(90deg);
+  z-index: 10;
+  top: 49px;
+  right: 56px;
+}
+
+.navigation {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #CDCDCD;
+  padding-top: 160px;
+  padding-right: 15px;
+  animation: showUp .3s ease;
+}
+
+@keyframes showUp {
+  0% {
+    display: block;
+    opacity: 0;
+  }
+  15% {
+    opacity: .3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.navigation__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation__item {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.navigation__item.selected > .navigation__link {
+  color: #FAFAFA;
+  cursor: default;
+}
+
+.navigation__item.selected > .navigation__link::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-bottom: 3px solid #F1CDB3;
+  transition: all .3s ease;
+}
+
+.navigation__link {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  text-align: center;
+  font-size: 32px;
+  line-height: 51px;
+  color: #CDCDCD;
+  transition: all .3s ease;
+}
+
+.navigation__link:hover {
+  color: #FAFAFA;
+}
+
+
+.burger.closed + .logo-nav__inner-wrapper > .navigation {
+  position: absolute;
+  opacity: 1;
+  display: none;
+}
+
+.burger.open + .logo-nav__inner-wrapper > .navigation {
+  display: block;
+  position: relative;
+  top: 30px;
+  left: 3%;
+}
+
+.burger.open + .logo-nav__inner-wrapper > .logo {
+  position: relative;
+  top: 30px;
+  left: 3%;
+}
+
+.burger.closed + .logo-nav__inner-wrapper {
+  opacity: 1;
+}
+
+.burger.open + .logo-nav__inner-wrapper {
+  position: absolute;
+  opacity: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-image: url("/assets/images/mobile-menu-open-bg.jpg");
+}
+
+.offer__wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.offer__title {
+  margin: 0;
+  font-family: Georgia, serif;
+  color: #FFFFFF;
+  line-height: 32px;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  padding-bottom: 42px;
+}
+
+.offer__description {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #CDCDCD;
+}
+
+.offer__button {
+  margin: 0 auto;
+  margin-top: 42px;
+}
+
+.offer__image {
+  margin-top: 105px;
+  background-image: url("/assets/images/start-screen-puppy.png");
+  width: 100%;
+  height: 271.77px;
+  background-size: contain;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 375px) {
+
+  .burger.open + .logo-nav__inner-wrapper {
+    width: 85.8vw;
+    right: 0;
+    left: initial;
+  }
+}
+
+@media (min-width: 768px) {
+  .background {
+    background-image: url("/assets/images/header-background-768.jpg");
+  }
+
+  .main-header {
+    padding: 30px 30px 0 30px;
+  }
+
+  .main-header__logo {
+    padding-right: 11.2%;
+    min-width: 186px;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .navigation {
+    display: block;
+  }
+
+  .burger.closed + .logo-nav__inner-wrapper {
+    opacity: 1;
+    display: flex;
+  }
+  
+  .burger.open + .logo-nav__inner-wrapper {
+    display: flex;
+    position: relative;
+    opacity: 1;
+    width: initial;
+    height: initial;
+    top: 0;
+    left: 0;
+    background-image: none;
+  }
+
+  .burger.closed + .logo-nav__inner-wrapper > .navigation {
+    position: relative;
+    opacity: 1;
+    display: block;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .burger.open + .logo-nav__inner-wrapper > .navigation {
+    padding: 0;
+    display: block;
+    position: initial;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .burger.open + .logo-nav__inner-wrapper > .logo {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .logo-nav__inner-wrapper {
+    display: flex;
+  }
+
+  .navigation__list {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3px;
+  }
+
+  .navigation__link {
+    font-size: 15px;
+  }
+
+  .navigation__item {
+    padding: 0;
+  }
+
+  .navigation__item.selected > .navigation__link::after {
+    bottom: -6px;
+  }
+
+  .offer {
+    padding-left: 19%;
+    position: relative;
+  }
+
+  .offer__title {
+    font-size: 44px;
+    line-height: 57px;
+    text-align: left;
+    letter-spacing: .05px;
+  }
+
+  .offer__description {
+    text-align: left;
+    line-height: 24px;
+    max-width: 460px;
+  }
+
+  .offer__button {
+    transform: translate(-35%);
+  }
+
+  .offer__image {
+    margin-top: 100px;
+    background-image: url("/assets/images/start-screen-puppy.png");
+    width: 100%;
+    height: 593px;
+    background-size: contain;
+    background-position: 88% 100%;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 1280px) {
+  .background {
+    background-image: url("/assets/images/header-bg-1280.jpg");
+    background-size: cover;
+  }
+
+  .main-header {
+    padding: 60px 40px 0 40px;
+    background-image: none;
+  }
+
+  .main-header__logo {
+    padding-right: 0;
+  }
+
+  .offer__wrapper {
+    padding: 0px 40px 0 40px;
+  }
+
+  .navigation {
+    max-width: 443px;
+  }
+
+  .logo-nav__inner-wrapper {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .offer__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .offer {
+    padding-top: 0;
+    padding-left: 0;
+    position: relative;
+    top: -10px;
+  }
+
+  .offer__description {
+    min-width: 460px;
+    padding-bottom: 42px;
+  }
+
+  .offer__image {
+    margin-top: 63px;
+    height: 728px;
+  }
+
+  .offer__button {
+    margin: 0;
+    transform: translate(0%);
+  }
 }

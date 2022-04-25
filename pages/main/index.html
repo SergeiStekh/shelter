@@ -8,26 +8,40 @@
   <title>Shelter</title>
 </head>
 <body>
+  <div class="background">
   <header class="main-header header">
-    <div class="main-header__logo logo">
-      <h1 class="logo__title">Cozy House</h1>
-      <p class="logo__description">Shelter for pets in Boston</p>
+    <div class="logo-nav__wrapper">
+      <div class="burger closed">
+        <div class="burger__line"></div>
+        <div class="burger__line"></div>
+        <div class="burger__line"></div>
+      </div>
+      <div class="logo-nav__inner-wrapper">
+        <a class="main-header__logo logo" href="/pages/main/">
+          <h1 class="logo__title">Cozy House</h1>
+          <p class="logo__description">Shelter for pets in Boston</p>
+        </a>
+        <nav class="main-header__nav navigation">
+          <ul class="navigation__list">
+            <li class="navigation__item selected"><a href="" class="navigation__link">About the shelter</a></li>
+            <li class="navigation__item"><a href="/pages/pets/" class="navigation__link">Our pets</a></li>
+            <li class="navigation__item"><a href="#help" class="navigation__link">Help the shelter</a></li>
+            <li class="navigation__item"><a href="#main-footer" class="navigation__link">Contacts</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    <nav class="main-header__nav navigation">
-      <ul class="navigation__list">
-        <li class="navigation__item"><a href="" class="navigation__link">About the shelter</a></li>
-        <li class="navigation__item"><a href="" class="navigation__link">Our pets</a></li>
-        <li class="navigation__item"><a href="" class="navigation__link">Help the shelter</a></li>
-        <li class="navigation__item"><a href="" class="navigation__link">Contacts</a></li>
-      </ul>
-    </nav>
   </header>
+    <div class="offer__wrapper">
+      <div class="offer">
+        <h2 class="offer__title">Not only people<br>need a house</h2>
+        <p class="offer__description">We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!</p>
+        <a class="button offer__button" href="#friends">Make a friend</a>
+      </div>
+      <div class="offer__image"></div>
+  </div>
   <main>
-    <section class="offer">
-      <h2 class="offer__title">Not only people need a house</h2>
-      <p class="offer__description">We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!</p>
-      <button class="button offer__button">Make a friend</button>
-    </section>
   </main>
+  <script src="/pages/main/script.js"></script>
 </body>
 </html>
