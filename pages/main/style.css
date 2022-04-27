@@ -276,7 +276,7 @@ h2 {
   display: block;
   position: relative;
   top: 30px;
-  background-image: url(/assets/images/mobile-menu-open-bg.jpg);
+  background-image: url(../../assets/images/mobile-menu-open-bg.jpg);
 }
 
 .burger.open + .logo-nav__inner-wrapper > .logo {
@@ -296,7 +296,7 @@ h2 {
   height: 100vh;
   top: 0;
   left: 0;
-  background-image: url("/assets/images/mobile-menu-open-bg.jpg");
+  background-image: url("../../assets/images/mobile-menu-open-bg.jpg");
 }
 
 .offer__wrapper {
@@ -334,7 +334,7 @@ h2 {
 
 .offer__image {
   margin-top: 105px;
-  background-image: url("/assets/images/start-screen-puppy.png");
+  background-image: url("../../assets/images/start-screen-puppy.png");
   width: 100%;
   height: 271.77px;
   background-size: contain;
@@ -551,7 +551,7 @@ h2 {
 .friends__button-left {
   width: 52px;
   height: 52px;
-  background: url("/assets/images/button_arrow.png");
+  background: url("../../assets/images/button_arrow.png");
   background-size: cover;
   background-position: center center;
   -webkit-transition: background-image 0.3s ease-in-out;
@@ -560,13 +560,13 @@ h2 {
 }
 
 .friends__button-left:hover {
-  background-image: url("/assets/images/button_arrow_hover.png");
+  background-image: url("../../assets/images/button_arrow_hover.png");
 }
 
 .friends__button-right {
   width: 52px;
   height: 52px;
-  background: url("/assets/images/button_arrow.png");
+  background: url("../../assets/images/button_arrow.png");
   background-size: cover;
   background-position: center center;
   -webkit-transform: rotate(180deg);
@@ -578,7 +578,7 @@ h2 {
 }
 
 .friends__button-right:hover {
-  background-image: url("/assets/images/button_arrow_hover.png");
+  background-image: url("../../assets/images/button_arrow_hover.png");
 }
 
 .friends__button {
@@ -786,7 +786,7 @@ width: 100%;
 .main-footer {
   max-width: 1280px;
   margin: 0 auto;
-  background: url("/assets/images/start-screen-bg-mobile.png");
+  background: url("../../assets/images/start-screen-bg-mobile.png");
   background-repeat: no-repeat;
   background-size: cover;
   padding-left: 10px;
@@ -974,7 +974,7 @@ width: 100%;
   display: block;
   width: 100%;
   height: 100%;
-  background-image: url("/assets/images/modal_close_button.svg");
+  background-image: url("../../assets/images/modal_close_button.svg");
   background-size: contain;
   border-radius: 100px;
   background-repeat: no-repeat;
@@ -984,7 +984,7 @@ width: 100%;
 }
 
 .modal__close:hover {
-  background-image: url("/assets/images/modal_close_button-hover.svg");
+  background-image: url("../../assets/images/modal_close_button-hover.svg");
 }
 
 .modal__image-wrapper {
@@ -1088,7 +1088,7 @@ width: 100%;
 
 @media (min-width: 768px) {
   .background {
-    background-image: url("/assets/images/header-background-768.jpg");
+    background-image: url("../../assets/images/header-background-768.jpg");
     background-size: contain;
   }
 
@@ -1210,7 +1210,7 @@ width: 100%;
 
   .offer__image {
     margin-top: 100px;
-    background-image: url("/assets/images/start-screen-puppy.png");
+    background-image: url("../../assets/images/start-screen-puppy.png");
     width: 100%;
     height: 593px;
     background-size: contain;
@@ -1384,7 +1384,7 @@ width: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     -ms-grid-rows: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    background: url("/assets/images/footer-bg-768.jpg");
+    background: url("../../assets/images/footer-bg-768.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -1567,7 +1567,7 @@ width: 100%;
 
 @media (min-width: 1280px) {
   .background {
-    background-image: url("/assets/images/header-bg-1280.jpg");
+    background-image: url("../../assets/images/header-bg-1280.jpg");
     background-size: contain;
   }
 
@@ -1975,7 +1975,7 @@ width: 100%;
 
   /* Footer 1280 */
   .main-footer__wrapper {
-    background: url("/assets/images/footer-bg-1280.jpg");
+    background: url("../../assets/images/footer-bg-1280.jpg");
     background-repeat: no-repeat;
     background-size: cover;
   }
