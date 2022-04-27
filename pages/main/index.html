@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="background">
-    <header class="main-header header">
+    <header class="main-header header scroll-section">
       <div class="logo-nav__wrapper">
         <div class="burger closed">
           <div class="burger__line"></div>
@@ -35,11 +35,13 @@
     <main>
       <div class="offer__wrapper">
         <section class="offer" id="offer">
-          <h2 class="offer__title">Not only people<br>need a house</h2>
-          <p class="offer__description">We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!</p>
-          <a class="button offer__button" href="#friends">Make a friend</a>
-        </section>
+          <div class="offer__text">
+            <h2 class="offer__title">Not only people<br>need a house</h2>
+            <p class="offer__description">We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!</p>
+            <a class="button offer__button" href="#friends">Make a friend</a>
+        </div>
         <div class="offer__image"></div>
+        </section>
       </div>
       <div class="about__wrapper">
       <section class="about" id="about">
@@ -54,48 +56,64 @@
       </section>
       </div>
       <div class="friends__wrapper">
-        <section class="friends" id="friends">
+        <section class="friends scroll-section" id="friends">
           <h2 class="friends__title">Our friends who<br> are looking for a house</h2>
           <ul class="friends__list" id="slider">
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-katrine-third.jpg" alt="Katrine cat image">
-              <p class="friends__name">Katrine</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-katrine-third.jpg" alt="Katrine cat image">
+                <p class="friends__name">Katrine</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+            </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-jennifer.jpg" alt="Jennifer dog image">
-              <p class="friends__name">Jennifer</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-jennifer.jpg" alt="Jennifer dog image">
+                <p class="friends__name">Jennifer</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+              </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-woody.jpg" alt="Katrine cat image">
-              <p class="friends__name">Woody</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-woody.jpg" alt="Katrine cat image">
+                <p class="friends__name">Woody</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+            </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-katrine-first.jpg" alt="Jennifer dog image">
-              <p class="friends__name">Sophia</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-katrine-first.jpg" alt="Jennifer dog image">
+                <p class="friends__name">Sophia</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+              </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-timmy.jpg" alt="Timmy cat image">
-              <p class="friends__name">Timmy</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-timmy.jpg" alt="Timmy cat image">
+                <p class="friends__name">Timmy</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+              </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-charly.jpg" alt="Charly dog image">
-              <p class="friends__name">Charly</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-charly.jpg" alt="Charly dog image">
+                <p class="friends__name">Charly</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+              </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-scarlet.jpg" alt="Scarlett dog image">
-              <p class="friends__name">Scarlett</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-scarlet.jpg" alt="Scarlett dog image">
+                <p class="friends__name">Scarlett</p>
+              <a class="button learn-more__button" href="#openModal">Learn more</a>
+              </a>
             </li>
             <li class="friends__item slider__item">
-              <img class="friends__image" src="/assets/images/pets-katrine-second.jpg" alt="Freddie cat image">
-              <p class="friends__name">Freddie</p>
-              <button class="button learn-more__button">Learn more</button>
+              <a href="#openModal" class="friends__item-card-link">
+                <img class="friends__image" src="/assets/images/pets-katrine-second.jpg" alt="Freddie cat image">
+                <p class="friends__name">Freddie</p>
+                <a class="button learn-more__button" href="#openModal">Learn more</a>
+              </a>
             </li>
           </ul>
           <div class="friends__slider-buttons">
@@ -146,10 +164,66 @@
               <p class="help__name">Sleeping areas</p>
             </li>
           </ul>
-          
+        </section>
+      </div>
+      <div class="donation__wrapper">
+        <section class="donation">
+          <div class="donation__text-wrapper">
+            <h2 class="donation__title">You can also<br> make a donation</h2>
+            <p class="donation__bank">Name of the bank / Type of bank account</p>
+            <a class="donation__link" href="#">
+              <img class="donation__card-image" src="/assets/icons/credit-card.svg" alt="credit card image">
+              <p class="donation__card-number">8380 2880 8028 8791 7435</p>
+            </a>
+            <p class="donation__legal-info">Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        </div>
+        <div class="donation__dog">
+          <img class="donation__dog-image" src="/assets/images/donation-dog.png" alt="donation dog image" srcset="/assets/images/donation-dog2x.png 2x">
+        </div>
         </section>
       </div>
     </main>
+    <div class="main-footer__wrapper">
+    <footer class="main-footer scroll-section" id="main-footer">
+      <div class="main-footer__left-wrapper">
+        <h2 class="main-footer__title">For questions and suggestions</h2>
+        <ul class="main-footer__list">
+          <li class="main-footer__item">
+            <a href="mailto:email@shelter.com" class="main-footer__link">
+              <img class="main-footer__icon" src="/assets/icons/mail.svg" alt="email svg">
+              <p class="main-footer__text">email@shelter.com</p>
+            </a>
+          </li>
+          <li class="main-footer__item">
+            <a href="tel:+136745677554" class="main-footer__link">
+              <img class="main-footer__icon" src="/assets/icons/phone.svg" alt="phone svg">
+              <p class="main-footer__text">+13 674 567 75 54</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-footer__center-wrapper">
+        <h2 class="main-footer__waiting-title">We are waiting for your visit</h2>
+        <ul class="main-footer__bottom-list">
+          <li class="main-footer__item">
+            <a href="https://www.google.com/maps?q=1+Central+Street,+Boston" class="main-footer__link main-footer__bottom-link">
+              <img class="main-footer__icon" src="/assets/icons/pin.svg" alt="pin svg">
+              <p class="main-footer__text">1 Central Street, Boston<br> (entrance from the store)</p>
+            </a>
+          </li>
+          <li class="main-footer__item">
+            <a href="https://www.google.com/maps?q=18+South+Park+London" class="main-footer__link main-footer__bottom-link">
+              <img class="main-footer__icon" src="/assets/icons/pin.svg" alt="pin svg">
+              <p class="main-footer__text">18 South Park, London</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-footer__img-wrapper">
+        <img class="main-footer__img" src="/assets/images/footer-puppy.png" alt="dog saying goodbye">
+      </div>
+    </footer>
+  </div>
   </div>
   <script src="/pages/main/script.js"></script>
 </body>
