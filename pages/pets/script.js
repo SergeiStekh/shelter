@@ -17,7 +17,7 @@ function toggleMenu(e) {
 }
 
 function navigation() {
-  let menuItems = document.querySelectorAll(".navigation__item");
+  let menuItems = document.querySelectorAll(".navigation__link");
   addListeners();
   highlightMenuItemsOnScroll();
 
@@ -28,12 +28,12 @@ function navigation() {
   }
 
   function reset() {
-    menuItems.forEach(item => item.classList.remove("selected"));
+    menuItems.forEach(item => item.parentNode.classList.remove("selected"));
   }
 
   function selectMenuItem(e) {
     reset();
-    this.classList.add("selected");
+    this.parentNode.classList.add("selected");
   }
 
   function highlightMenuItemsOnScroll() {
@@ -41,7 +41,7 @@ function navigation() {
       let scrollDistance = window.scrollY;
       if (scrollDistance < 200) {
         reset();
-        menuItems[1].classList.add("selected");
+        menuItems[1].parentNode.classList.add("selected");
       }
     });
   }
@@ -69,6 +69,7 @@ function pagination(windowWidth = window.innerWidth) {
 
   function paginate(e) {
     e.preventDefault();
+    e.stopPropagation();
 
     let previousPageBtnPressed = Array.from(e.target.classList).includes("pagination__arrow__left");
 
@@ -123,11 +124,6 @@ function pagination(windowWidth = window.innerWidth) {
     if (pageNumber < pagesQuantity) {
       pageNumber += 1;
       showSlides();
-      // window.scrollTo({
-      //   top: document.querySelector(".friends").offsetTop,
-      //   left: 0,
-      //   behavior: "instant"
-      // });
     }
   }
 
@@ -135,11 +131,6 @@ function pagination(windowWidth = window.innerWidth) {
     if (pageNumber > 1) {
       pageNumber -= 1;
       showSlides();
-      // window.scrollTo({
-      //   top: document.querySelector(".friends").offsetTop,
-      //   left: 0,
-      //   behavior: "instant"
-      // });
     }
   }
 
@@ -147,11 +138,6 @@ function pagination(windowWidth = window.innerWidth) {
     if (pageNumber > 1) {
     pageNumber = 1;
     showSlides();
-    // window.scrollTo({
-    //   top: document.querySelector(".friends").offsetTop,
-    //   left: 0,
-    //   behavior: "instant"
-    // });
   }
   }
   
@@ -159,11 +145,6 @@ function pagination(windowWidth = window.innerWidth) {
     if (pageNumber < pagesQuantity) {
     pageNumber = pagesQuantity;
     showSlides();
-    // window.scrollTo({
-    //   top: document.querySelector(".friends").offsetTop,
-    //   left: 0,
-    //   behavior: "instant"
-    // });
   }
   }
 
