@@ -23,156 +23,73 @@ function toggleMenu(e) {
 }
 
 function mainSlider(windowWidth = window.innerWidth) {
+  let itemsPerPage = 0;
+  if (windowWidth >= 100 && windowWidth < 768) {
+    itemsPerPage = 1;
+  }
+  if (windowWidth >= 768 && windowWidth < 1280) {
+    itemsPerPage = 2;
+  }
+  if (windowWidth >= 1280) {
+    itemsPerPage = 3;
+  }
+
   let slider = document.getElementById('slider');
-  let sliderItems = slider.querySelectorAll(".slider__item");
+  let slides = slider.querySelectorAll(".slider__item");
+
+  let pageNumber = 1;
+  let slidesQuantity = slides.length;
+  let pagesQuantity = Math.ceil(slidesQuantity / itemsPerPage);
+  
   let arrowLeft = document.querySelector(".control_prev");
   let arrowRight = document.querySelector(".control_next");
-  let current = 0;
-  let current2 = 1;
-  let current3 = 2;
+  arrowRight.addEventListener("click", nextSlide);
+  arrowLeft.addEventListener("click", previousSlide);
   
   function reset() {
-    for (let i = 0; i < sliderItems.length; i++) {
-      sliderItems[i].classList.remove("active__slide");
+    for (let i = 0; i < slidesQuantity; i++) {
+      slides[i].classList.remove("active__slide");
     }
   }
   
-  function init() {
+  function showSlides() {
     reset();
-    if (windowWidth < 768) {
-      sliderItems[0].classList.add("active__slide");
+    slides.forEach((slide, idx) => {
+      let showFromIdx = ((pageNumber * itemsPerPage) - itemsPerPage);
+      let showToIdx = (showFromIdx + itemsPerPage - 1) < slidesQuantity - 1 ? (showFromIdx + itemsPerPage - 1) : slidesQuantity - 1;
+      if (idx >= showFromIdx && idx <= showToIdx) {
+        slide.classList.add("active__slide");
+      }
+    })
+  }
+
+  function nextSlide() {
+    if (pageNumber === pagesQuantity && Array.from(Array.from(slides)[slidesQuantity - 1].classList).includes("active__slide")) {
+      pageNumber = 1;
+      showSlides();
+      return
     }
 
-    if (windowWidth >= 768 && windowWidth < 1280) {
-      sliderItems[0].classList.add("active__slide");
-      sliderItems[1].classList.add("active__slide");
-    } 
-
-    if (windowWidth >= 1280) {
-      sliderItems[0].classList.add("active__slide");
-      sliderItems[1].classList.add("active__slide");
-      sliderItems[2].classList.add("active__slide");
+    if (pageNumber < pagesQuantity) {
+      pageNumber += 1;
+      showSlides();
     }
   }
-  
-  function slideLeft() {
-    reset();
-    if (windowWidth < 768) {
-      sliderItems[current - 1].classList.add("active__slide");
-      current--;
+
+  function previousSlide() {
+    if (pageNumber === 1 && Array.from(Array.from(slides)[0].classList).includes("active__slide")) {
+      pageNumber = pagesQuantity;
+      showSlides();
+      return
     }
-
-    if (windowWidth >= 768 && windowWidth < 1280) {
-      sliderItems[current - 2].classList.add("active__slide");
-      sliderItems[current2 - 2].classList.add("active__slide");
-      current--;
-      current--;
-      current2--;
-      current2--;
-    } 
-
-    if (windowWidth >= 1280) {
-      if (sliderItems[current - 3] === undefined || sliderItems[current2 - 3] === undefined || sliderItems[current3 - 3] === undefined) {
-        current = 0;
-        current2 = 1;
-        current3 = 2;
-        sliderItems[current].classList.add("active__slide");
-        sliderItems[current2].classList.add("active__slide");
-      } else {
-        sliderItems[current - 3].classList.add("active__slide");
-        sliderItems[current2 - 3].classList.add("active__slide");
-        sliderItems[current3 - 3].classList.add("active__slide");
-        current -= 3;
-        current2 -= 3;
-        current3 -= 3;
-      }
+    
+    if (pageNumber > 1) {
+      pageNumber -= 1;
+      showSlides();
     }
   }
-  
-  arrowLeft.addEventListener("click", function () {
-    if (windowWidth < 768) {
-      if (current === 0) {
-        current = sliderItems.length;
-      }
-    }
 
-    if (windowWidth >= 768 && windowWidth < 1280) {
-      if (current === 0 && current2 === 1) {
-        current = sliderItems.length;
-        current2 = sliderItems.length + 1;
-      }
-    } 
-
-    if (windowWidth >= 1280) {
-      if (current === 0 && current2 === 1 && current3 === 2) {
-        current = sliderItems.length;
-        current2 = sliderItems.length + 1;
-        current3 = sliderItems.length + 2;
-      }
-    }
-    slideLeft();
-  });
-  
-  function slideRight() {
-    reset();
-    if (windowWidth < 768) {
-      sliderItems[current + 1].classList.add("active__slide");
-      current++;
-    }
-
-    if (windowWidth >= 768 && windowWidth < 1280) {
-      sliderItems[current + 2].classList.add("active__slide");
-      sliderItems[current2 + 2].classList.add("active__slide");
-      current++;
-      current++;
-      current2++;
-      current2++;
-    } 
-
-    if (windowWidth >= 1280) {
-      
-      sliderItems[current + 3] ? sliderItems[current + 3].classList.add("active__slide") : null;
-
-      sliderItems[current2 + 3] ? sliderItems[current2 + 3].classList.add("active__slide") : null;
-
-      sliderItems[current3 + 3] ? sliderItems[current3 + 3].classList.add("active__slide") : null;
-
-      current += 3;
-      current2 += 3;
-      current3 += 3;
-    }
-  }
-  
-  arrowRight.addEventListener("click", function () {
-    if (windowWidth < 768) {
-      if (current === sliderItems.length - 1) {
-        current = -1;
-      }
-    }
-
-    if (windowWidth >= 768 && windowWidth < 1280) {
-      if (current === sliderItems.length - 2 && current2 === sliderItems.length - 1) {
-        current = -2;
-        current2 = -1;
-      }
-    } 
-
-    if (windowWidth >= 1280) {
-      if (current === sliderItems.length - 3 && current2 === sliderItems.length - 2 && current3 === sliderItems.length - 1) {
-        current = -3;
-        current2 = -2;
-        current3 = -1;
-      }
-
-      if (current === sliderItems.length - 2 && current2 === sliderItems.length - 1) {
-        current = -3;
-        current2 = -2;
-        current3 = -1;
-      }
-    }
-    slideRight();
-  });
-  init()
+  showSlides()
 }
 
 function navigation() {
@@ -285,6 +202,16 @@ function modal() {
       breed: "Dog - Jack Russell Terrier",
       description: "This cute boy, Charly, is three years old and he likes adults and kids. He isn’t fond of many other dogs, so he might do best in a single dog home. Charly has lots of energy, and loves to run and play. We think a fenced yard would make him very happy.",
       age: "3 years",
+      inoculations: "none",
+      diseases: "none",
+      parasites: "none"
+    },
+    promienik: {
+      url: "../../assets/images/promienik.png",
+      name: "Promienik",
+      breed: "Parrot - Lovebird",
+      description: "This cute boy, Promienik, is eight years old and he likes everyone and smile all the time. He is the very best friend for everyone. Promienik has lots of energy, and loves to fly and play. He will enjoy every game with you.",
+      age: "8 years",
       inoculations: "none",
       diseases: "none",
       parasites: "none"

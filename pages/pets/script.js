@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   navigation();
   pagination();
-  // modal();
+  modal();
 })
 
 function toggleMenu(e) {
@@ -109,7 +109,6 @@ function pagination(windowWidth = window.innerWidth) {
         slide.classList.add("visible");
       }
     })
-
   }
 
   function reset() {
@@ -124,6 +123,11 @@ function pagination(windowWidth = window.innerWidth) {
     if (pageNumber < pagesQuantity) {
       pageNumber += 1;
       showSlides();
+      // window.scrollTo({
+      //   top: document.querySelector(".friends").offsetTop,
+      //   left: 0,
+      //   behavior: "instant"
+      // });
     }
   }
 
@@ -131,17 +135,36 @@ function pagination(windowWidth = window.innerWidth) {
     if (pageNumber > 1) {
       pageNumber -= 1;
       showSlides();
+      // window.scrollTo({
+      //   top: document.querySelector(".friends").offsetTop,
+      //   left: 0,
+      //   behavior: "instant"
+      // });
     }
   }
 
   function firstPage() {
+    if (pageNumber > 1) {
     pageNumber = 1;
     showSlides();
+    // window.scrollTo({
+    //   top: document.querySelector(".friends").offsetTop,
+    //   left: 0,
+    //   behavior: "instant"
+    // });
+  }
   }
   
   function lastPage() {
+    if (pageNumber < pagesQuantity) {
     pageNumber = pagesQuantity;
     showSlides();
+    // window.scrollTo({
+    //   top: document.querySelector(".friends").offsetTop,
+    //   left: 0,
+    //   behavior: "instant"
+    // });
+  }
   }
 
   function adjustButtonStyles() {
@@ -149,7 +172,7 @@ function pagination(windowWidth = window.innerWidth) {
       document.querySelector(".pagination__twin-arrow-left").classList.add("pagination__disabled");
       document.querySelector(".pagination__arrow__left").classList.add("pagination__disabled");
     }
-    
+
     if (pageNumber === pagesQuantity) {
       document.querySelector(".pagination__twin-arrow-right").classList.add("pagination__disabled");
       document.querySelector(".pagination__arrow__right").classList.add("pagination__disabled");
@@ -240,10 +263,20 @@ function modal() {
       inoculations: "none",
       diseases: "none",
       parasites: "none"
+    },
+    promienik: {
+      url: "../../assets/images/promienik.png",
+      name: "Promienik",
+      breed: "Parrot - Lovebird",
+      description: "This cute boy, Promienik, is eight years old and he likes everyone and smile all the time. He is the very best friend for everyone. Promienik has lots of energy, and loves to fly and play. He will enjoy every game with you.",
+      age: "8 years",
+      inoculations: "none",
+      diseases: "none",
+      parasites: "none"
     }
   }
 
-  let parent = document.querySelector(".main-footer");
+  let parent = document.querySelector(".pets-footer");
   let buttons = document.querySelectorAll(".friends__item");
 
   buttons.forEach(el => {
