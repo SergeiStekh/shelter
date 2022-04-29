@@ -6,8 +6,9 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   let burgerElement = document.querySelector(".burger");
-
-  burgerElement.addEventListener('click', toggleMenu);
+  if (windowWidth < 768) {
+    burgerElement.addEventListener('click', toggleMenu);
+  }
   
   navigation();
 
@@ -18,6 +19,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function toggleMenu(e) {
   if (e) {e.preventDefault()};
+  if (window.innerWidth >= 768) {
+    return
+  }
   document.querySelector(".burger").classList.toggle("open");
   document.querySelector(".burger").classList.toggle("closed");
 }
@@ -82,7 +86,7 @@ function mainSlider(windowWidth = window.innerWidth) {
       showSlides();
       return
     }
-    
+
     if (pageNumber > 1) {
       pageNumber -= 1;
       showSlides();
@@ -93,7 +97,7 @@ function mainSlider(windowWidth = window.innerWidth) {
 }
 
 function navigation() {
-  let menuItems = document.querySelectorAll(".navigation__item");
+  let menuItems = document.querySelectorAll(".navigation__link");
   addListeners();
   highlightMenuItemsOnScroll();
 
@@ -104,12 +108,12 @@ function navigation() {
   }
 
   function reset() {
-    menuItems.forEach(item => item.classList.remove("selected"));
+    menuItems.forEach(item => item.parentNode.classList.remove("selected"));
   }
 
   function selectMenuItem(e) {
     reset();
-    this.classList.add("selected");
+    this.parentNode.classList.add("selected");
     toggleMenu();
   }
 
@@ -118,7 +122,7 @@ function navigation() {
       let scrollDistance = window.scrollY;
       if (scrollDistance < 200) {
         reset();
-        menuItems[0].classList.add("selected");
+        menuItems[0].parentNode.classList.add("selected");
       }
     });
   }
