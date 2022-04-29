@@ -1,19 +1,24 @@
 window.addEventListener('DOMContentLoaded', () => {
-  let burgerElement = document.querySelector(".burger");
-  burgerElement.addEventListener('click', toggleMenu);
-  window.addEventListener('resize', (e) => {
-    windowWidth = window.innerWidth;
-    pagination(windowWidth);
-  });
+  toggleMenu();
   navigation();
   pagination();
   modal();
 })
 
-function toggleMenu(e) {
-  if (e) {e.preventDefault()};
-  document.querySelector(".burger").classList.toggle("open");
-  document.querySelector(".burger").classList.toggle("closed");
+function toggleMenu() {
+  if (window.innerWidth < 768) {
+    let burgerElement = document.querySelector(".burger");
+    burgerElement.addEventListener('click', () => {
+      burgerElement.classList.toggle("open");
+      burgerElement.classList.toggle("closed");
+      console.log(Array.from(burgerElement.classList).includes("open"))
+      if (Array.from(burgerElement.classList).includes("open")) {
+        document.body.style.overflow = "hidden"
+      } else {
+        document.body.style.overflow = "visible"
+      }
+    });
+  }
 }
 
 function navigation() {
@@ -34,6 +39,10 @@ function navigation() {
   function selectMenuItem(e) {
     reset();
     this.parentNode.classList.add("selected");
+    document.body.style.overflow = "visible";
+    let burgerElement = document.querySelector(".burger");
+    burgerElement.classList.toggle("open");
+    burgerElement.classList.toggle("closed");
   }
 
   function highlightMenuItemsOnScroll() {
