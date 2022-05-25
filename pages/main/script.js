@@ -6,6 +6,8 @@ window.addEventListener('DOMContentLoaded', () => {
   mainSlider();
 
   modal();
+
+  watchMediaChanges();
 })
 
 function toggleMenu() {
@@ -285,3 +287,19 @@ function modal() {
   };
 
 }
+
+function watchMediaChanges() {
+  const media768 = window.matchMedia('(max-width: 768px)');
+  const media1280 = window.matchMedia('(max-width: 1280px)');
+  media768.addEventListener("change", loadSliderOnMediaChange);
+  media1280.addEventListener("change", loadSliderOnMediaChange);
+
+  function loadSliderOnMediaChange(e) {
+    if (e.matches) {
+      mainSlider();
+    } else {
+      mainSlider();
+    }
+  }
+}
+
