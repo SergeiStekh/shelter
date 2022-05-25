@@ -321,7 +321,7 @@ h2 {
 .friends__item {
   display: none;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 270px;
   opacity: 1;
   background: #FAFAFA;
   padding-bottom: 30px;
@@ -459,6 +459,8 @@ h2 {
 
 .pagination {
   width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
   height: 52px;
   padding-top: 12px;
   display: -webkit-box;
@@ -641,6 +643,11 @@ h2 {
 }
 
 .pets-footer__bottom-list {
+  display: grid;
+  grid-template-columns: max-content;
+  justify-content: center;
+  position: relative;
+  left: -4px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -648,6 +655,7 @@ h2 {
 }
 
 .pets-footer__img-wrapper {
+  width: 87%;
   margin: 0 auto;
   -webkit-transform: translate(0px, 2px);
       -ms-transform: translate(0px, 2px);
@@ -656,9 +664,8 @@ h2 {
 
 .pets-footer__img {
   display: block;
-  margin: 0 auto;
-  width: 260px;
-  height: 269px;
+  width: 100%;
+  height: auto;
 }
 
 /* Modal */
@@ -1037,7 +1044,7 @@ h2 {
     -ms-grid-row-span: 1;
     grid-row: 1 / 2;
     padding-left: 5.1%;
-    padding-right: 35px;
+    padding-right: 14.5%;
   }
 
   .pets-footer__img-wrapper {
@@ -1071,6 +1078,11 @@ h2 {
 
   .pets-footer__item {
     margin: 0;
+  }
+
+  .pets-footer__bottom-list {
+    left: 0;
+    justify-content: initial;
   }
 
   .pets-footer__link {
@@ -1172,6 +1184,8 @@ h2 {
   .pets-header {
     padding: 30px 40px 30px 40px;
     background-image: none;
+    max-width: 1280px;
+    box-sizing: border-box;
   }
 
   .pets-header__logo {
@@ -1259,7 +1273,7 @@ h2 {
     background-size: contain;
     padding-left: 40px;
     padding-right: 40px;
-    max-height: 300px;
+    box-sizing: border-box;
   }
 
   .pets-footer > *:nth-child(1) {
