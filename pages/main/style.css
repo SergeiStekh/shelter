@@ -17,6 +17,18 @@
 
 /* Global styles */
 
+.fade {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(41, 41, 41, 0.6);
+  z-index: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -116,6 +128,10 @@ h2 {
   text-decoration: none;
 }
 
+.logo {
+  position: relative;
+}
+
 .logo__title {
   padding-bottom: 10px;
 }
@@ -151,6 +167,7 @@ h2 {
   -webkit-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
+  z-index: 1;
 }
 
 .burger__line {
@@ -265,6 +282,11 @@ h2 {
   color: #FAFAFA;
 }
 
+.logo-nav__inner-wrapper {
+  position: absolute;
+  z-index: 1;
+}
+
 
 .burger.closed + .logo-nav__inner-wrapper > .navigation {
   position: absolute;
@@ -284,24 +306,72 @@ h2 {
   left: 3%;
 }
 
-.burger.closed + .logo-nav__inner-wrapper {
-  opacity: 1;
+.burger.closed + .logo-nav__inner-wrapper > .logo {
+  animation: logoReverse 1s ease-in;
 }
 
+.burger.closed + .logo-nav__inner-wrapper {
+  opacity: 1;
+  animation: burgerReversed .3s ease;
+}
+    
 .burger.open + .logo-nav__inner-wrapper {
   position: absolute;
   opacity: 1;
-  width: 100vw;
+  width: 100%;
+  width: 320px;
   height: 100vh;
+  right: 0;
   top: 0;
-  left: 0;
   background-image: url("../../assets/images/mobile-menu-open-bg.jpg");
+  animation: burger .3s ease forwards;
+}
+
+@keyframes burger {
+  0% {
+    right: -300px;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes burgerReversed {
+  0% {
+    position: absolute;
+    opacity: 1;
+    width: 100%;
+    width: 320px;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background-image: url(../../assets/images/mobile-menu-open-bg.jpg);
+  }
+
+  100% {
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    right: -100%;
+    background-image: url(../../assets/images/mobile-menu-open-bg.jpg);
+  }
+}
+
+@keyframes logoReverse {
+  0% {
+    /* top: 30px; */
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .offer__wrapper {
   max-width: 1280px;
   margin: 0 auto;
-  padding-top: 60px;
+  padding-top: 120px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -419,6 +489,7 @@ h2 {
 }
 
 .friends__list {
+  position: relative;
   padding: 0 15px;
   margin: 0;
   list-style: none;
@@ -463,37 +534,31 @@ h2 {
 
 .friends__item.active__slide {
   display: block;
-  -webkit-animation: showSlide .2s linear forwards;
-          animation: showSlide .2s linear forwards;
-}
-
-@-webkit-keyframes showSlide {
-  0% {
-    display: block;
-  }
-  15% {
-    opacity: .3;
-  }
-  50% {
-    opacity: .5;
-  }
-  100% {
-    opacity: 1;
-  }
+  position: relative;
+  -webkit-animation: showSlide .3s linear forwards;
+          animation: showSlide .3s linear forwards;
 }
 
 @keyframes showSlide {
   0% {
     display: block;
+    opacity: 0;
+    left: 0%;
+    top: 0%;
   }
-  15% {
+  40% {
+    left: 200%;
     opacity: .3;
   }
-  50% {
-    opacity: .5;
+
+  80% {
+    left: -200%;
+    opacity: .6;
   }
+
   100% {
     opacity: 1;
+    left: 0%;
   }
 }
 
@@ -590,6 +655,7 @@ h2 {
 
 .friends__item-card-link {
   display: block;
+  position: relative;
   margin: 0;
   padding: 0;
   color: black;
@@ -990,6 +1056,10 @@ width: 100%;
   transition: all .3s ease;
 }
 
+.modal__close.hover {
+  background-image: url("../../assets/images/modal_close_button-hover.svg");
+}
+
 .modal__close:hover {
   background-image: url("../../assets/images/modal_close_button-hover.svg");
 }
@@ -1064,15 +1134,6 @@ width: 100%;
           transform: translate(0px, -3px);
 }
 
-
-@media (min-width: 375px) {
-  .burger.open + .logo-nav__inner-wrapper {
-    width: 85.8vw;
-    right: 0;
-    left: initial;
-  }
-}
-
 @media (min-width: 580px) {
   .about__wrapper {
     margin-bottom: 0;
@@ -1103,6 +1164,10 @@ width: 100%;
 
   .navigation {
     display: block;
+  }
+
+  .logo-nav__inner-wrapper {
+    position: relative;
   }
 
   .burger.closed + .logo-nav__inner-wrapper {
@@ -1177,6 +1242,9 @@ width: 100%;
   }
 
   /* Offer-768 */
+  .offer__wrapper {
+    padding-top: 60px;
+  }
 
   .offer__text {
     width: fit-content;
