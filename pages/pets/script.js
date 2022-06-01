@@ -1,25 +1,152 @@
+
 window.addEventListener('DOMContentLoaded', () => {
-  toggleMenu();
-  navigation();
-  pagination();
-  modal();
-  watchMediaChanges();
+  app();
 })
 
-function toggleMenu() {
-  if (window.innerWidth < 768) {
-    let burgerElement = document.querySelector(".burger");
-    burgerElement.addEventListener('click', () => {
-      burgerElement.classList.toggle("open");
-      burgerElement.classList.toggle("closed");
-      console.log(Array.from(burgerElement.classList).includes("open"))
-      if (Array.from(burgerElement.classList).includes("open")) {
-        document.body.style.overflow = "hidden"
-      } else {
-        document.body.style.overflow = "visible"
-      }
-    });
+class DomElement {
+  constructor(parent, tagName, className, innerText = "", insertRule = "append") {
+    this.parent = parent;
+    this.tagName = tagName;
+    this.className = className;
+    this.innerText = innerText;
+    this.insertRule = insertRule;
+
+    this.node = document.createElement(tagName);
+    this.node.className = className;
+    this.node.innerText = innerText;
+
+    function insertAfter(newNode, existingNode) {
+      existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+    }
+
+    if (this.insertRule === "append") {
+      this.parent.append(this.node);
+    }
+
+    if (this.insertRule === "prepend") {
+      this.parent.perpend(this.node);
+    }
+
+    if (typeof this.insertRule === "object") {
+      insertAfter(this.node, insertRule);
+    }
+    
   }
+
+  addAttribute(name, value) {
+    this.node.setAttribute(name, value);
+  }
+}
+
+class FriendsList extends DomElement {
+  constructor(parent, tagName, className, innerText = "", insertRule, data = null) {
+    super(parent, tagName, className, innerText, insertRule);
+    this.data = data;
+  }
+
+  async getFriends(url, options) {
+    try {
+      const friendsList = await fetch(url, options);
+      if (!friendsList.ok) {
+        throw new Error(`some problem with fetching, status: ${friendsList.statusText}`)
+      }
+      this.data = await friendsList.json();
+      this.addFriendCards();
+    } catch(err) {
+      console.error(err)
+    }
+  }
+
+  addFriendCards() {
+    let dataWithoutPromienik = [...this.data].slice(0, this.data.length - 1);
+    
+
+    [...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik].forEach(el => {
+      new FriendCard(this.node, "li", "friends__item slider__item", "", "append", el)
+    });
+
+    const paginationWrapper = new DomElement(this.parent, "div", "friends__pagination pagination", "", document.querySelector(".friends__list"));
+
+    const paginationItem1 = new DomElement(paginationWrapper.node, "a", "pagination__item pagination__disabled pagination__twin-arrow-left", "<<");
+    paginationItem1.addAttribute("href", "#");
+
+    const paginationItem2 = new DomElement(paginationWrapper.node, "a", "pagination__item pagination__disabled pagination__arrow__left", "<");
+    paginationItem2.addAttribute("href", "#");
+
+    const paginationItem3 = new DomElement(paginationWrapper.node, "a", "pagination__item pagination__active  pagination__page", "1");
+    paginationItem3.addAttribute("href", "#");
+
+    const paginationItem4 = new DomElement(paginationWrapper.node, "a", "pagination__item pagination__arrow__right", ">");
+    paginationItem4.addAttribute("href", "#");
+
+    const paginationItem5 = new DomElement(paginationWrapper.node, "a", "pagination__item pagination__twin-arrow-right", ">>");
+    paginationItem4.addAttribute("href", "#");
+  }
+}
+
+class FriendCard extends DomElement {
+  constructor(parent, tagName, className, innerText, insertRule, friendData) {
+    super(parent, tagName, className, innerText, insertRule);
+    this.friendData = friendData;
+    const link = new DomElement(this.node, "a", "friends__item-card-link");
+    link.addAttribute("href", "#openModal");
+    const img = new DomElement(link.node, "img", "friends__image");
+    img.addAttribute("src", friendData.url);
+    img.addAttribute("alt", `${friendData.breed}: ${friendData.name}`);
+    const name = new DomElement(link.node, "p", "friends__name", friendData.name);
+    const learnMoreBtn = new DomElement(link.node, "a", "button learn-more__button", "Learn more");
+    learnMoreBtn.addAttribute("href", "#openModal");
+  }
+}
+
+async function app(initial = true) {
+  const friendCards = await new FriendsList(document.querySelector("#friends"), "ul", "friends__list slider", "", document.querySelector(".friends__title")).getFriends("../../assets/pets.json");
+
+  if (initial) {
+    document.querySelector(".burger").addEventListener('click', toggleMenu);
+    navigation();
+    pagination();
+    modal();
+    watchMediaChanges();
+  } else {
+    pagination();
+    modal();
+  }
+}
+
+function toggleMenu() {
+  let burgerElement = document.querySelector(".burger");
+  if (window.innerWidth > 768) {
+    document.body.style.overflow = "visible";
+    burgerElement.className = "burger closed";
+    if (document.querySelector('.fade')) {
+      document.querySelector(".fade").remove();
+    }
+    return
+  }
+
+  burgerElement.classList.toggle("open");
+  burgerElement.classList.toggle("closed");
+  if (Array.from(burgerElement.classList).includes("open")) {
+    document.body.style.overflow = "hidden";
+    let shadow = document.createElement("div");
+    shadow.classList.add("fade");
+    document.body.append(shadow);
+    shadow.addEventListener('click', closeMenu);
+  } else {
+    document.body.style.overflow = "visible";
+    document.querySelector('.fade').remove();
+  }
+}
+
+function closeMenu() {
+  let burgerElement = document.querySelector(".burger");
+  document.body.style.overflow = "visible";
+  burgerElement.className = "burger closed";
+  if (document.querySelector('.fade')) {
+    document.querySelector(".fade").remove();
+  }
+  return
 }
 
 function navigation() {
@@ -41,9 +168,7 @@ function navigation() {
     reset();
     this.parentNode.classList.add("selected");
     document.body.style.overflow = "visible";
-    let burgerElement = document.querySelector(".burger");
-    burgerElement.classList.toggle("open");
-    burgerElement.classList.toggle("closed");
+    closeMenu();
   }
 
   function highlightMenuItemsOnScroll() {
@@ -317,16 +442,25 @@ function modal() {
     elToAppend.insertAdjacentHTML('afterend', markdown);
 
     let closeBtn = document.querySelector(".modal__close");
+    
+    document.querySelector(".modal").addEventListener("mouseover", (e) => {
+        closeBtn.classList.remove("hover");
+    });
+    document.querySelector(".modal").addEventListener("mouseleave", (e) => {
+        closeBtn.classList.add("hover");
+    })
 
-    closeModal(closeBtn)
-  }
-
-  function closeModal(closeModalBtn) {
-    closeModalBtn.addEventListener("click", () => {
+    closeBtn.addEventListener("click", () => {
       document.querySelector(".modal-bg").remove();
       document.body.style.overflow = "initial";
     })
-  };
+
+    document.querySelector('.modal-bg').addEventListener('click', (e) => {
+      if (e.target.className === "modal-bg") {
+        document.querySelector(".modal-bg").remove();
+        document.body.style.overflow = "initial";
+      }
+    })}
 
 }
 
@@ -338,9 +472,15 @@ function watchMediaChanges() {
 
   function loadSliderOnMediaChange(e) {
     if (e.matches) {
-      pagination();
+      closeMenu();
+      document.querySelector(".friends__list").remove();
+      document.querySelector(".friends__pagination").remove();
+      app(false);
     } else {
-      pagination();
+      closeMenu();
+      document.querySelector(".friends__list").remove();
+      document.querySelector(".friends__pagination").remove();
+      app(false);
     }
   }
 }
