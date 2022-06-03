@@ -57,11 +57,18 @@ class FriendsList extends DomElement {
     }
   }
 
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1)); 
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+  }
+
   addFriendCards() {
     let dataWithoutPromienik = [...this.data].slice(0, this.data.length - 1);
     
-
-    [...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik, ...dataWithoutPromienik].forEach(el => {
+    [...this.shuffleArray(dataWithoutPromienik), ...this.shuffleArray(dataWithoutPromienik), ...this.shuffleArray(dataWithoutPromienik), ...this.shuffleArray(dataWithoutPromienik), ...this.shuffleArray(dataWithoutPromienik), ...this.shuffleArray(dataWithoutPromienik)].forEach(el => {
       new FriendCard(this.node, "li", "friends__item slider__item", "", "append", el)
     });
 
