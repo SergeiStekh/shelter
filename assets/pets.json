@@ -1,5 +1,6 @@
 [
     {
+        "id": 0,
         "url": "../../assets/images/pets-jennifer.jpg",
         "name": "Jennifer",
         "breed": "Dog - Labrador",
@@ -9,6 +10,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 1,
         "url": "../../assets/images/pets-katrine-third.jpg",
         "name": "Katrine",
         "breed": "Cat - British Shorthair",
@@ -18,6 +20,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 2,
         "url": "../../assets/images/pets-katrine-first.jpg",
         "name": "Sophia",
         "breed": "Dog - Shih tzu",
@@ -27,6 +30,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 3,
         "url": "../../assets/images/pets-woody.jpg",
         "name": "Woody",
         "breed": "Dog - Golden Retriever",
@@ -36,6 +40,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 4,
         "url": "../../assets/images/pets-scarlet.jpg",
         "name": "Scarlett",
         "breed": "Dog - Jack Russell Terrier",
@@ -45,6 +50,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 5,
         "url": "../../assets/images/pets-timmy.jpg",
         "name": "Timmy",
         "breed": "Cat - British Shorthair",
@@ -54,6 +60,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 6,
         "url": "../../assets/images/pets-katrine-second.jpg",
         "name": "Freddie",
         "breed": "Cat - British Shorthair",
@@ -63,6 +70,7 @@
         "diseases": ["none"],
         "parasites": ["none"]
     }, {
+        "id": 7,
         "url": "../../assets/images/pets-charly.jpg",
         "name": "Charly",
         "breed": "Dog - Jack Russell Terrier",
@@ -71,15 +79,15 @@
         "inoculations": "none",
         "diseases": ["none"],
         "parasites": ["none"]
-    },
-    {
-      "url": "../../assets/images/promienik.png",
-      "name": "Promienik",
-      "breed": "Parrot - Lovebird",
-      "description": "This cute boy, Promienik, is eight years old and he likes adults and kids. He has lots of energy, and loves to fly and play. We think a fenced yard would make him very happy.",
-      "age": "8 years",
-      "inoculations": "none",
-      "diseases": ["none"],
-      "parasites": ["none"]
-  }
+    }, {
+        "id": 8,
+        "url": "../../assets/images/promienik.png",
+        "name": "Promienik",
+        "breed": "Parrot - Lovebird",
+        "description": "This cute boy, Promienik, is eight years old and he likes adults and kids. He has lots of energy, and loves to fly and play. We think a fenced yard would make him very happy.",
+        "age": "8 years",
+        "inoculations": "none",
+        "diseases": ["none"],
+        "parasites": ["none"]
+    }
 ]

@@ -50,19 +50,11 @@ class FriendsList extends DomElement {
         throw new Error(`some problem with fetching, status: ${friendsList.statusText}`)
       }
       this.data = await friendsList.json();
-      this.addFriendCards();
+      this.friendsSlider = new Slider(this.node, this.data);
+      this.friendsSlider.renderSlides();
     } catch(err) {
       console.error(err)
     }
-  }
-
-  addFriendCards() {
-    Array.from(this.data).forEach(el => {
-      new FriendCard(this.node, "li", "friends__item slider__item", "", "append", el)
-    });
-    const buttonsWrapper = new DomElement(this.parent, "div", "friends__slider-buttons", "", document.querySelector(".friends__list"));
-    const buttonLeft = new DomElement(buttonsWrapper.node, "div", "friends__button-left control_prev");
-    const buttonRight = new DomElement(buttonsWrapper.node, "div", "friends__button-right control_next")
   }
 }
 
@@ -81,21 +73,90 @@ class FriendCard extends DomElement {
   }
 }
 
+class Slider {
+  constructor(parent, slides) {
+    this.parent = parent;
+    this.allSlides = slides;
+    this.slidesQuantity = this.allSlides.length;
+    this.slidesDomElements = null;
+    this.currentSlidesIds = [];
+    this.renderSliderButtons();
+    this.slidesDomElements = this.allSlides.map(slide => {
+      return new FriendCard(this.parent, "li", "friends__item slider__item", "", "append", slide);
+    });
+  }
+  
+  renderSliderButtons() {
+    const buttonsWrapper = new DomElement(this.parent, "div", "friends__slider-buttons", "", document.querySelector(".friends__list"));
+    const buttonLeft = new DomElement(buttonsWrapper.node, "div", "friends__button-left control_prev");
+    const buttonRight = new DomElement(buttonsWrapper.node, "div", "friends__button-right control_next");
+    buttonLeft.node.addEventListener('click', (e) => this.renderSlides(e));
+    buttonRight.node.addEventListener('click', (e) => this.renderSlides(e));
+  }
+
+  detectSlidesPerPageQuantity() {
+    let width = document.body.clientWidth;
+  
+    if (width >= 100 && width < 768) {
+      this.slidesQuantity = 1;
+    }
+    if (width >= 768 && width < 1280) {
+      this.slidesQuantity = 2;
+    }
+    if (width >= 1280) {
+      this.slidesQuantity = 3;
+    }
+  }
+
+  shuffleSlides(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1)); 
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+  }
+
+  chooseSlidesToRender() {
+    this.detectSlidesPerPageQuantity();
+    if (this.currentSlidesIds.length === 0) {
+      this.currentSlidesIds = [...this.allSlides].map(slide => slide.id).slice(0, this.slidesQuantity);
+    } else {
+      let newIds = [];
+      this.allSlides.forEach(slide => {
+        if (!this.currentSlidesIds.includes(slide.id)) {
+          newIds.push(slide.id);
+        }
+      });
+      this.currentSlidesIds = this.shuffleSlides(newIds).slice(0, this.slidesQuantity);
+    }
+  }
+
+  renderSlides() {
+    this.chooseSlidesToRender();
+    this.removeSlides();
+    this.slidesDomElements.forEach(el => {
+      if (this.currentSlidesIds.includes(el.friendData.id)) {
+        el.node.classList.add("active__slide");
+      }
+    })
+  }
+
+  removeSlides() {
+    this.slidesDomElements.forEach(el => el.node.classList.remove("active__slide"));
+  }
+}
+
 async function app(initial = true) {
-  const friendCards = await new FriendsList(document.querySelector("#friends"), "ul", "friends__list slider", "", document.querySelector(".friends__title")).getFriends("../../assets/pets.json");
+  await new FriendsList(document.querySelector("#friends"), "ul", "friends__list slider", "", document.querySelector(".friends__title")).getFriends("../../assets/pets.json");
 
   if (initial) {
     document.querySelector(".burger").addEventListener('click', toggleMenu);
     navigation();
-    mainSlider();
     modal();
     watchMediaChanges();
   } else {
-    mainSlider();
     modal();
   }
-
-  
 }
 
 function toggleMenu() {
