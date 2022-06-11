@@ -3,6 +3,21 @@ window.addEventListener('DOMContentLoaded', () => {
   app();
 })
 
+async function app(initial = true) {
+  const friendCards = await new FriendsList(document.querySelector("#friends"), "ul", "friends__list slider", "", document.querySelector(".friends__title")).getFriends("../../assets/pets.json");
+
+  if (initial) {
+    document.querySelector(".burger").addEventListener('click', toggleMenu);
+    navigation();
+    pagination();
+    modal();
+    watchMediaChanges();
+  } else {
+    pagination();
+    modal();
+  }
+}
+
 class DomElement {
   constructor(parent, tagName, className, innerText = "", insertRule = "append") {
     this.parent = parent;
@@ -62,6 +77,7 @@ class FriendsList extends DomElement {
       let j = Math.floor(Math.random() * (i + 1)); 
       [array[i], array[j]] = [array[j], array[i]];
     }
+
     return array
   }
 
@@ -103,21 +119,6 @@ class FriendCard extends DomElement {
     const name = new DomElement(link.node, "p", "friends__name", friendData.name);
     const learnMoreBtn = new DomElement(link.node, "a", "button learn-more__button", "Learn more");
     learnMoreBtn.addAttribute("href", "#openModal");
-  }
-}
-
-async function app(initial = true) {
-  const friendCards = await new FriendsList(document.querySelector("#friends"), "ul", "friends__list slider", "", document.querySelector(".friends__title")).getFriends("../../assets/pets.json");
-
-  if (initial) {
-    document.querySelector(".burger").addEventListener('click', toggleMenu);
-    navigation();
-    pagination();
-    modal();
-    watchMediaChanges();
-  } else {
-    pagination();
-    modal();
   }
 }
 
@@ -201,6 +202,7 @@ function pagination(windowWidth = window.innerWidth) {
     itemsPerPage = 8;
   }
   let slides = Array.from(document.querySelectorAll(".friends__item"));
+  
   let slidesQuantity = document.querySelectorAll(".friends__item").length;
   let pagesQuantity = Math.ceil(slidesQuantity / itemsPerPage);
   let pageNumber = 1;
@@ -245,11 +247,22 @@ function pagination(windowWidth = window.innerWidth) {
     let pageElement = document.querySelector(".pagination__page");
     pageElement.innerHTML = pageNumber;
 
-    slides.forEach((slide, idx) => {
+    let memorizer = [];
+
+    slides.forEach((slide, idx, allSlidesArr) => {
+      let petName = slide.querySelector(".friends__name").innerText;
       let showFromIdx = ((pageNumber * itemsPerPage) - itemsPerPage);
       let showToIdx = (showFromIdx + itemsPerPage - 1) < slidesQuantity - 1 ? (showFromIdx + itemsPerPage - 1) : slidesQuantity - 1;
       if (idx >= showFromIdx && idx <= showToIdx) {
-        slide.classList.add("visible");
+        if (!memorizer.includes(petName)) {
+          slide.classList.add("visible");
+          memorizer.push(petName);
+        } else {
+          let notShowedPet = allSlidesArr.filter(el => !memorizer.includes(el.querySelector(".friends__name").innerText))[0];
+          notShowedPet.classList.add("visible");
+          notShowedPetName = notShowedPet.querySelector(".friends__name").innerText;
+          memorizer.push(notShowedPetName);
+        }
       }
     })
   }
